@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"os"
+	"strconv"
 )
 
 // Ingest reads a file in to memory.
@@ -19,6 +20,27 @@ func SplitLines(b ...[]byte) ([][]string, error) {
 		for s.Scan() {
 			lines[i] = append(lines[i], s.Text())
 		}
+	}
+	return lines, nil
+}
+
+// ParseMatrix parses a input bytes in to a matrix of ints.
+func ParseMatrix(b []byte) ([][]int, error) {
+	sc := bufio.NewScanner(bytes.NewReader(b))
+	sc.Split(bufio.ScanLines)
+	lines := [][]int{}
+	for sc.Scan() {
+		sw := bufio.NewScanner(bytes.NewReader(sc.Bytes()))
+		sw.Split(bufio.ScanRunes)
+		line := []int{}
+		for sw.Scan() {
+			i, err := strconv.Atoi(sw.Text())
+			if err != nil {
+				return nil, err
+			}
+			line = append(line, i)
+		}
+		lines = append(lines, line)
 	}
 	return lines, nil
 }

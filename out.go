@@ -1,8 +1,10 @@
 package common
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func PrettyPrintInts(ints [][]int) {
+func PrettyPrintMatrix(ints [][]int) {
 	for i := range ints {
 		for j := range ints[i] {
 			fmt.Printf("%d", ints[i][j])

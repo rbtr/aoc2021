@@ -11,18 +11,24 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := one(puzzle); err != nil {
+	if err := one(puzzle.Sample); err != nil {
 		log.Fatal(err)
 	}
-	if err := two(puzzle); err != nil {
+	if err := one(puzzle.Input); err != nil {
+		log.Fatal(err)
+	}
+	if err := two(puzzle.Sample); err != nil {
+		log.Fatal(err)
+	}
+	if err := two(puzzle.Input); err != nil {
 		log.Fatal(err)
 	}
 }
 
-func one(puzzle *common.Puzzle) error {
+func one(puzzle []byte) error {
     return nil
 }
 
-func two(puzzle *common.Puzzle) error {
+func two(puzzle []byte) error {
     return nil
 }
