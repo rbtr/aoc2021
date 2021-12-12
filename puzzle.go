@@ -1,5 +1,7 @@
 package common
 
+import "log"
+
 const (
 	sampleFileName = "sample"
 	inputFileName  = "input"
@@ -19,4 +21,21 @@ func Load() (p *Puzzle, err error) {
 		return nil, err
 	}
 	return p, nil
+}
+
+type Solver func(b []byte) (string, error)
+
+func Solve(p *Puzzle, solvers ...Solver) {
+	for i, solver := range solvers {
+		sample, err := solver(p.Sample)
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf("%d.sample\t%s", i, sample)
+		input, err := solver(p.Input)
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf("%d.input\t%s", i, input)
+	}
 }
