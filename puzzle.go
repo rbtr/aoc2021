@@ -1,6 +1,9 @@
 package common
 
-import "log"
+import (
+	"log"
+	"time"
+)
 
 const (
 	sampleFileName = "sample"
@@ -27,15 +30,19 @@ type Solver func(b []byte) (string, error)
 
 func Solve(p *Puzzle, solvers ...Solver) {
 	for i, solver := range solvers {
+		start := time.Now()
 		sample, err := solver(p.Sample)
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Printf("%d.sample\t%s", i+1, sample)
+		duration := time.Since(start)
+		log.Printf("%d.sample\t%s\t(%s)", i+1, sample, duration.String())
+		start = time.Now()
 		input, err := solver(p.Input)
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Printf("%d.input\t%s", i+1, input)
+		duration = time.Since(start)
+		log.Printf("%d.input\t%s\t(%s)", i+1, input, duration.String())
 	}
 }

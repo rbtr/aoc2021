@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 )
 
 var rootCtx context.Context
@@ -26,7 +25,6 @@ func init() {
 		sig := <-sigCh
 		log.Printf("caught exit signal %v, exiting\n", sig)
 		cancel()
-		<-time.Tick(5 * time.Second) //nolint // wait up to 5s for the cancellation to propogate before exiting hard.
 		log.Printf("exiting")
 		os.Exit(1)
 	}()
