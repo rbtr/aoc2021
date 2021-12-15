@@ -31,11 +31,11 @@ func Solve(p *Puzzle, solvers ...Solver) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Printf("%d.sample\t%s", i, sample)
+		log.Printf("%d.sample\t%s", i+1, sample)
 		input, err := solver(p.Input)
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Printf("%d.input\t%s", i, input)
+		log.Printf("%d.input\t%s", i+1, input)
 	}
 }
