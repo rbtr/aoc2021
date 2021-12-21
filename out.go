@@ -26,3 +26,12 @@ func PrettyPrintBools(matr [][]bool) {
 	}
 	fmt.Printf("\n")
 }
+
+func PrettyPrintStrings(strings [][]string) {
+	for i := range strings {
+		for j := range strings[i] {
+			fmt.Printf(strings[i][j])
+		}
+		fmt.Printf("\n")
+	}
+}

@@ -11,8 +11,8 @@ const (
 )
 
 type Puzzle struct {
-	Sample []byte
-	Input  []byte
+	Sample Data
+	Input  Data
 }
 
 func Load() (p *Puzzle, err error) {
@@ -26,7 +26,7 @@ func Load() (p *Puzzle, err error) {
 	return p, nil
 }
 
-type Solver func(b []byte) (string, error)
+type Solver func(d Data) (string, error)
 
 func Solve(p *Puzzle, solvers ...Solver) {
 	for i, solver := range solvers {
